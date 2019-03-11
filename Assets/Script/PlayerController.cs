@@ -35,11 +35,6 @@ public class PlayerController : MonoBehaviour
             {
                 this.myRigidbody.AddForce(transform.TransformDirection(Vector3.forward) * 0.25f, ForceMode.Impulse);
             }
-            // if(isTouchingLadder && Input.GetKey(KeyCode.UpArrow))
-            //if (isTouchingLadder && Input.GetKey(KeyCode.Space))
-            //{
-            //    this.myRigidbody.AddForce(transform.TransformDirection(Vector3.up) * 0.1f, ForceMode.Impulse);  //まだのぼらない　　→　ﾎﾞﾀﾝかえてみる
-            //}
         }       
     }
     //衝突処理
@@ -48,19 +43,12 @@ public class PlayerController : MonoBehaviour
             //障害物に衝突
             //まず、はしごに衝突したら上か下にいく。前に少し進める　　→　難しそう！はしごの上下判定も必要。さらに組み合わせのあるはしごもある
             //自動的に上or下にワープするのはかえって難しい感じ。単純にUpForce、DownForceを使ってみるか
-           //if (other.gameObject.tag == "Ladder")
             if (other.gameObject.tag == "Ladder" && Input.GetKey(KeyCode.UpArrow))
             {
                 Debug.Log("LADDER!");
  //           isTouchingLadder = true;
                 this.myRigidbody.AddForce(transform.TransformDirection(Vector3.up) * 0.38f, ForceMode.Impulse); //こうしてもダメ、→0.1では力が弱すぎた
-                //多分、動きはUpdate()におかないとダメなんだろう　　→　それでもだめだった
 
-           
-            //                if (Input.GetKey(KeyCode.UpArrow))                //動かず
-            //                {
-            //                    this.myRigidbody.AddForce(transform.TransformDirection(Vector3.up) * 0.1f, ForceMode.Impulse);
-            //                }
         }
         }
 }

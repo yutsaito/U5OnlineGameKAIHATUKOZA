@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody myRigidbody;
+    //はしごに触っていたらtrue
+//    private bool isTouchingLadder = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,25 +35,33 @@ public class PlayerController : MonoBehaviour
             {
                 this.myRigidbody.AddForce(transform.TransformDirection(Vector3.forward) * 0.25f, ForceMode.Impulse);
             }
+            // if(isTouchingLadder && Input.GetKey(KeyCode.UpArrow))
+            //if (isTouchingLadder && Input.GetKey(KeyCode.Space))
+            //{
+            //    this.myRigidbody.AddForce(transform.TransformDirection(Vector3.up) * 0.1f, ForceMode.Impulse);  //まだのぼらない　　→　ﾎﾞﾀﾝかえてみる
+            //}
         }       
     }
     //衝突処理
-        void OntriggerStay(Collider other)     //OnTriggerEnterでは衝突した瞬間だけしか働かないだろう、接触中みたいな関数がないとうまくいかないだろう　→　OnTriggerStayというのがあった！
+        void OnTriggerStay(Collider other)     //OnTriggerEnterでは衝突した瞬間だけしか働かないだろう、接触中みたいな関数がないとうまくいかないだろう　→　OnTriggerStayというのがあった！
         {
             //障害物に衝突
             //まず、はしごに衝突したら上か下にいく。前に少し進める　　→　難しそう！はしごの上下判定も必要。さらに組み合わせのあるはしごもある
             //自動的に上or下にワープするのはかえって難しい感じ。単純にUpForce、DownForceを使ってみるか
-            if (other.gameObject.tag == "Ladder")  
+           //if (other.gameObject.tag == "Ladder")
+            if (other.gameObject.tag == "Ladder" && Input.GetKey(KeyCode.Space))
             {
                 Debug.Log("LADDER!");
-                //はしごの大きさを取得したい！
-                //positionを↑or↓、且つ、前に
-                //this.myRigidbody.transform.position=new Vector3(     )
-                if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    this.myRigidbody.AddForce(transform.TransformDirection(Vector3.up) * 0.1f, ForceMode.Impulse);
-                }
-            }
+ //           isTouchingLadder = true;
+                this.myRigidbody.AddForce(transform.TransformDirection(Vector3.up) * 0.1f, ForceMode.Impulse); //こうしてもダメ、
+                //多分、動きはUpdate()におかないとダメなんだろう　　→　それでもだめだった
+
+
+            //                if (Input.GetKey(KeyCode.UpArrow))                //動かず
+            //                {
+            //                    this.myRigidbody.AddForce(transform.TransformDirection(Vector3.up) * 0.1f, ForceMode.Impulse);
+            //                }
+        }
         }
 }
 

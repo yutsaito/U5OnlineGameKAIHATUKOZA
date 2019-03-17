@@ -12,7 +12,14 @@ public class SetWordMgr : MonoBehaviour
     //WordsDataBase（本来独立したｸﾗｽにしたいが・・・、現時点でよくわからない20190108）
     string[] word5Sets = { "effort", "努力", "期待", "実行", "効果", "suppose", "思う", "支える", "越える", "探す", "quote", "引用する", "褒める", "喜ぶ", "戦う", "opposite", "反対の", "賛成の", "遠方の", "地方の" };
 
-    public int totallQuestions;     //全Question数　Inspectorで設定する（まずは）
+    //word5setのセット数
+    public int word5SetsSetsNo;
+
+    //ﾃﾞｰﾀ中の問題の番号（5個セットなので実際には÷５の値)
+        //とりあえず、問題は4問とする`が、あとでモンスター生成数に応じて増減できるよう、lISTをつかう。
+    public List<int> questionNoInData = new List<int>();
+
+    public int totalQuestions;     //全Question数　Inspectorで設定する（まずは）→　ﾌｨｰﾙﾄﾞ上のモンスター数
 
     //ここからが単語登録ｼｰﾝのﾒｲﾝﾌﾟﾛｸﾞﾗﾑ(①Wordをinput, ②選択肢ﾎﾞﾀﾝをｸﾘｯｸ、③正誤判定、以上の繰り返しを制限時間で終え、対戦開始画面に移行)
     Button questionButton;     //QuestionWordはドアに壁に貼り付けたﾎﾞﾀﾝに表示する         InputField inputWord; //入力Word
@@ -21,20 +28,75 @@ public class SetWordMgr : MonoBehaviour
     //選択肢をｼｬｯﾌﾙしﾎﾞﾀﾝに書き込むｸﾗｽのｲﾝｽﾀﾝｽ、そのまま次のResultSceneでも使うために、関数の外で宣言することにした
     public SetAnsLabelSet setAnsLabelSet = new SetAnsLabelSet();
 
+    //MonsterTagを持つGameObjectを取得するための配列変数
+    GameObject[] monsters;
+
     // Use this for initialization
     void Start()
     {
+        //MonsterTagを持つ全てのGameObjectの、配列変数への代入
+        monsters = GameObject.FindGameObjectsWithTag("MonsterTag");
+        //ｸｲｽﾞ数=ﾓﾝｽﾀｰ数
+        totalQuestions = monsters.Length;
+        Debug.Log(totalQuestions+"問");
+        //Dataの(質問、選択肢1～4のセット数)
+        word5SetsSetsNo = word5Sets.Length / 5;
+        //ｸｲｽﾞをランダムに選択する(ﾗﾝﾀﾞﾑ数を問題数だけ生成させる）
+
+            var ary = MyExtensions.uniqRandAry(word5SetsSetsNo, totalQuestions);
+             Debug.Log(ary.Length);
+            for (int s = 0; s < ary.Length; s++)
+            {
+                Debug.Log(ary[s]);
+            }
+
+        //20190315
+        //次はモンスタープレハブのController.csを作り、publicで問題と答え４つのpublic変数を用意すること！そしてそれをこのScriptから呼ぶこと！
+
+
+
+
+
+
+
+
+
         DontDestroyOnLoad(this);                    //次のシーンでも問題ﾘｽﾄを使うので
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //GameObjectモンスターが配列に入っているかの確認のために回した
+        foreach (GameObject monster in monsters)
+            monster.transform.Rotate(0, 1, 0);
     }
 
-    //壁にはったQuestionButtonを押すことで呼ばれる、ここからプログラムが始まる
-    public void OnQuestionButtonClicked()
+
+
+
+
+    public static class MyExtensions
+    {
+        /// <summary>
+        /// 重複のないランダムな配列を取得
+        /// </summary>
+        public static int[] uniqRandAry(int max, int length)
+        {
+            return Enumerable.Range(0, max).OrderBy(n => Guid.NewGuid()).Take(length).ToArray();
+        }
+    }
+
+
+
+
+
+
+
+
+
+//ﾓﾝｽﾀｰﾌﾟﾚﾌｧﾌﾞにﾎﾞﾀﾝを持たせたい。そのQuestionButtonを押すことで呼ばれるメソッドとしたい、ここからプログラムが始まる
+public void OnQuestionButtonClicked()
     {
         //入力されたwordを取得(もともとはUI→InputFieldだったものをInputQtnと名を変え、そこのInputFieldを取得(これで入力textが取得できる))
         //inputWord = GameObject.Find("InputQtn").GetComponent<InputField>();

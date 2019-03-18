@@ -53,9 +53,13 @@ public class SetWordMgr : MonoBehaviour
         //20190315→20190318
         //次はモンスタープレハブのController.csを作り、publicで問題と答え４つのpublic変数を用意すること！そしてそれにこのScriptからクイズセットを渡す！
 
-        Button btn = monsters[2].GetComponent<Button>();    // 対象のボタン
-        Text btnText = btn.GetComponentInChildren<Text>();
-        Debug.Log(btnText.text);
+        //Button btn = monsters[2].GetComponent<Button>();    // 対象のボタン
+        //Text btnText = btn.GetComponentInChildren<Text>();
+        //Debug.Log(btnText.text);
+
+        Text quiz = GameObject.Find("Canvas/Button").GetComponentInChildren<Text>();
+        quiz.text = "eminent";
+ 
 
 
 

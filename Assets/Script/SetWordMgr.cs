@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class SetWordMgr : MonoBehaviour
 {
     //WordsDataBase（本来独立したｸﾗｽにしたいが・・・、現時点でよくわからない20190108）
-    string[] word5Sets = { "effort", "努力", "期待", "実行", "効果", "suppose", "思う", "支える", "越える", "探す", "quote", "引用する", "褒める", "喜ぶ", "戦う", "opposite", "反対の", "賛成の", "遠方の", "地方の" };
+    string[] word5Sets = { "effort", "努力", "期待", "実行", "効果", "suppose", "思う", "支える", "越える", "探す", "quote", "引用する", "褒める", "喜ぶ", "戦う", "opposite", "反対の", "賛成の", "遠方の", "地方の", "eminent", "著名な", "敵の", "照射している", "大部分の" };
 
     //word5setのセット数
     public int word5SetsSetsNo;
@@ -38,21 +38,24 @@ public class SetWordMgr : MonoBehaviour
         monsters = GameObject.FindGameObjectsWithTag("MonsterTag");
         //ｸｲｽﾞ数=ﾓﾝｽﾀｰ数
         totalQuestions = monsters.Length;
-        Debug.Log(totalQuestions+"問");
+        Debug.Log(monsters[0].name);
+        Debug.Log(monsters[1].name);
+        Debug.Log(monsters[2].name);
+        Debug.Log(monsters[3].name);
+
         //Dataの(質問、選択肢1～4のセット数)
         word5SetsSetsNo = word5Sets.Length / 5;
-        //ｸｲｽﾞをランダムに選択する(ﾗﾝﾀﾞﾑ数を問題数だけ生成させる）
+        //ｸｲｽﾞをランダムな順番で選択するための変数（ダブりなし）((質問、選択肢1～4のセットの組を、ランダムに並べるための変数としてary[])）
 
-            var ary = MyExtensions.uniqRandAry(word5SetsSetsNo, totalQuestions);
-             Debug.Log(ary.Length);
-            for (int s = 0; s < ary.Length; s++)
-            {
-                Debug.Log(ary[s]);
-            }
+        var ary = MyExtensions.uniqRandAry(word5SetsSetsNo, totalQuestions);
 
-        //20190315
-        //次はモンスタープレハブのController.csを作り、publicで問題と答え４つのpublic変数を用意すること！そしてそれをこのScriptから呼ぶこと！
 
+        //20190315→20190318
+        //次はモンスタープレハブのController.csを作り、publicで問題と答え４つのpublic変数を用意すること！そしてそれにこのScriptからクイズセットを渡す！
+
+        Button btn = monsters[2].GetComponent<Button>();    // 対象のボタン
+        Text btnText = btn.GetComponentInChildren<Text>();
+        Debug.Log(btnText.text);
 
 
 

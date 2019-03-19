@@ -30,6 +30,8 @@ public class SetWordMgr : MonoBehaviour
 
     //MonsterTagを持つGameObjectを取得するための配列変数
     GameObject[] monsters;
+    //
+    Text[] quizWord=new Text[5];
 
     // Use this for initialization
     void Start()
@@ -38,6 +40,7 @@ public class SetWordMgr : MonoBehaviour
         monsters = GameObject.FindGameObjectsWithTag("MonsterTag");
         //ｸｲｽﾞ数=ﾓﾝｽﾀｰ数
         totalQuestions = monsters.Length;
+        //名前確認
         Debug.Log(monsters[0].name);
         Debug.Log(monsters[1].name);
         Debug.Log(monsters[2].name);
@@ -46,23 +49,22 @@ public class SetWordMgr : MonoBehaviour
         //Dataの(質問、選択肢1～4のセット数)
         word5SetsSetsNo = word5Sets.Length / 5;
         //ｸｲｽﾞをランダムな順番で選択するための変数（ダブりなし）((質問、選択肢1～4のセットの組を、ランダムに並べるための変数としてary[])）
-
-        var ary = MyExtensions.uniqRandAry(word5SetsSetsNo, totalQuestions);
-
+        var quizRandomizer = MyExtensions.uniqRandAry(word5SetsSetsNo, totalQuestions);
 
         //20190315→20190318
         //次はモンスタープレハブのController.csを作り、publicで問題と答え４つのpublic変数を用意すること！そしてそれにこのScriptからクイズセットを渡す！
-
-        //Button btn = monsters[2].GetComponent<Button>();    // 対象のボタン
-        //Text btnText = btn.GetComponentInChildren<Text>();
-        //Debug.Log(btnText.text);
-
-        Text quiz = GameObject.Find("Canvas/Button").GetComponentInChildren<Text>();
-        quiz.text = "eminent";
- 
-
-
-
+        //Text quiz = GameObject.Find("Canvas/Button").GetComponentInChildren<Text>();　　//GameObject.Findはﾋｴﾗﾙｷｰから探す、ｱｸﾃｨﾌﾞなものだけ
+        //quiz.text = "eminent";
+        //ﾓﾝｽﾀｰﾌﾟﾚﾊﾌﾞの子ｵﾌﾞｼﾞｪｸﾄのﾎﾞﾀﾝにTEXTを渡す  //20190319やっとできた！
+        for (int i = 0; i <= monsters.Length - 1; i++)
+        {
+            for (int k = 0; k <= 4; k++)
+            {
+                //Transform.Findは子ｵﾌﾞｼﾞｪｸﾄから探す、非ｱｸﾃｨﾌﾞも//秋山さんに教えてもらった
+                quizWord[k] = monsters[i].transform.Find("Canvas/Button" + k).GetComponentInChildren<Text>();     //quizWord[0]:問題 quizWord[1]:正解 quizWord[2-4]:誤回答
+                quizWord[k].text = word5Sets[quizRandomizer[i]*5+k];                      //ここまででﾓﾝｽﾀｰのﾎﾞﾀﾝにｸｲｽﾞを渡せた、しかし、このままだと、正解が必ずButton1;
+            }
+        }
 
 
 
@@ -93,6 +95,17 @@ public class SetWordMgr : MonoBehaviour
             return Enumerable.Range(0, max).OrderBy(n => Guid.NewGuid()).Take(length).ToArray();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

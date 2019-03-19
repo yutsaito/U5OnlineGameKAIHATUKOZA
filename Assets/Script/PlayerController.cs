@@ -5,18 +5,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody myRigidbody;
-    //はしごに触っていたらtrue
-        private bool isTouchingLadder = false;
-    //はしご登るときのゆらゆら
-    // private float yurayuraNo = 0.3f;
-    //はしごのCode通過回数
-    // private int calledNo=0;
-    //はしごのUp/Down/Stay(1/-1/0)
-    // private int v = 0;
+    ////はしごに触っていたらtrue
+    //    private bool isTouchingLadder = false;
 
      [SerializeField] float m_moveSpeedOnLadder = 1.0f;    // このメンバ変数は上の方に書いた方がよい  鈴木さんに書いてもらった
-//    m：メンバ変数（privateな変数）を示す
-//s：静的変数（static付き変数）を示す
+                                                           //    m：メンバ変数（privateな変数）を示す
+                                                           //s：静的変数（static付き変数）を示す
+    //ﾓﾝｽﾀｰと出会った時のﾌﾗｸﾞ
+    //private bool isEncountered=false;
+    public bool isEncountered=false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +24,48 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-
     {       //FixedUpdateにしても変わらずに回ってしまうのだが・・・
+        //if (Input.GetKey(KeyCode.LeftArrow))
+        //{
+        //    this.transform.Rotate(0, -2, 0);
+        //}
+        //if (Input.GetKey(KeyCode.RightArrow))
+        //{
+        //    this.transform.Rotate(0, 2, 0);
+        //}
+
+        //if (Input.GetKey(KeyCode.UpArrow))
+        //{
+        //    // ローカルX軸正方向に移動
+        //   // this.myRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+        //    if (this.myRigidbody.velocity.magnitude < 2.0f)     //速度制限
+        //    {
+        //        this.myRigidbody.AddForce(transform.TransformDirection(Vector3.forward) * 0.25f, ForceMode.Impulse);
+        //    }
+        //} 
+        //ﾓﾝｽﾀｰと出会ってなければ動ける
+        if (!isEncountered) {PlayerMovement(); }
+        
+    }
+
+    //ﾓﾝｽﾀｰとの衝突処理
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "MonsterTag") {
+            //まず、画面を止めたい→出会ったらﾌﾗｸﾞをtrue
+            isEncountered = true;
+            //次にモンスターを正対させたい　　→　SetWordMgrで書く、ということは　isEncounteredはpublicにする
+            //選択肢をランダムに配列しなおしたい　　→　ここで書く
+            //ﾎﾞﾀﾝ表示はゆっくりだしたい(今はぱっとでる)
+            GameObject monsterCanvas = other.transform.Find("Canvas").gameObject;
+            CanvasGroup monsterCanvasGroup = monsterCanvas.GetComponent<CanvasGroup>();
+            monsterCanvasGroup.alpha = 1; 
+            //クイズに行く
+        }
+    }
+
+    void PlayerMovement()
+    {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             this.transform.Rotate(0, -2, 0);
@@ -41,13 +78,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             // ローカルX軸正方向に移動
-           // this.myRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+            // this.myRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
             if (this.myRigidbody.velocity.magnitude < 2.0f)     //速度制限
             {
                 this.myRigidbody.AddForce(transform.TransformDirection(Vector3.forward) * 0.25f, ForceMode.Impulse);
             }
-        }       
-    }
+        }
+    }  
+
     /* === 以降 梯子を上り下りする処理 === */
 
    // [SerializeField] float m_moveSpeedOnLadder = 5.0f;    // このメンバ変数は上の方に書いた方がよい  鈴木さんに書いてもらった
@@ -69,7 +107,7 @@ public class PlayerController : MonoBehaviour
             //{
             //    myRigidbody.velocity = Vector3.up * v * m_moveSpeedOnLadder;
             //}
-            //はしごをゆらすため、GameObjectを取得、したいが、どうやって取得する　→　gameObjectが衝突しているLadderのハズ
+
             
             //はしごのUp/Down/Stay(1/-1/0)
             int v = 0;
@@ -77,10 +115,6 @@ public class PlayerController : MonoBehaviour
             {
                 v = 1;
                 //               myRigidbody.velocity = Vector3.zero;
-                //はしごをちょっと揺らす  →　あきらめた
-                //for(int i = 0; i < 40; i++) {  gameObject.transform.Translate(0.01f,0.01f,0.01f);}
-                //for (int i = 0; i < 500; i++) ;
-                //for (int i = 0; i < 40; i++) { gameObject.transform.Translate(-0.01f, -0.01f, -0.01f); }
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
@@ -99,6 +133,53 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+
+
+
+
+
+
+//基礎１. 「target_1」を取得してみましょう
+//Transform.Findを使った場合
+//例１）Transform target = this.transform.Find(“Parent_2 / target_1”);
+
+//例２）GameObject target = this.transform.Find(“Parent_2 / target_1”).gameObject;
+
+//Transform.Findを使えば、target_1が非アクティブでも取得可能ですね。
+
+//注意が必要なのは、Transform.Findを使ったときは「Transform」で取得されることです。
+
+//例２では「.gameObject」として、TransformからGameObjectを取得しています。
+
+
+//基礎１. 「target_1」を取得してみましょう
+//“Script”にスクリプトがアタッチされているため、
+
+//this.transform.Find(“Parent_2/target”);
+
+//このように直接”子オブジェクト”を探す書き方ができません。
+
+ 
+
+//一旦、targetの親オブジェクトで「アクティブ」になっているParent_2を取得し、
+
+//そのあとでtargetを取得する、という手順を踏みます。
+
+//１．GameObject temp = GameObject.Find(“Parent_1/Parent_2”);
+
+//２．GameObject target = temp.transform.Find(“target”).gameObject;
+
+//この手順を踏めば、非アクティブなtargetも取得することができます。
+
+ 
+
+//上記を１つにまとめて書くこともできます。
+
+//GameObject target = GameObject.Find(“Parent_1/Parent_2”).transform.Find(“target”).gameObject;
+
+//こんな感じになります。
+
+
 
 
 

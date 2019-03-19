@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 9500000}
+  - component: {fileID: 5404654532734530069}
+  - component: {fileID: 8711263627621551476}
   m_Layer: 0
   m_Name: BlueJelly
   m_TagString: Untagged
@@ -98,6 +100,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &5404654532734530069
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 0.44898933
+  m_Height: 0.93157923
+  m_Direction: 1
+  m_Center: {x: -0.0021080524, y: 0.017064482, z: -0.024047881}
+--- !u!65 &8711263627621551476
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.89797866, y: 0.93157923, z: 0.8319661}
+  m_Center: {x: -0.0021080524, y: 0.017064482, z: -0.024047881}
 --- !u!1 &171089010340058826
 GameObject:
   m_ObjectHideFlags: 0

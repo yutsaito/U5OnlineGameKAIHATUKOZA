@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
                                                            //s：静的変数（static付き変数）を示す
     //ﾓﾝｽﾀｰと出会った時のﾌﾗｸﾞ
     //private bool isEncountered=false;
-    public bool isEncountered=false;
+      public bool isEncountered=false;
+   // public static bool isEncountered=false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
         //} 
         //ﾓﾝｽﾀｰと出会ってなければ動ける
         if (!isEncountered) {PlayerMovement(); }
-        
+      
     }
 
     //ﾓﾝｽﾀｰとの衝突処理

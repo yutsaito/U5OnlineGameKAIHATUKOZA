@@ -34,7 +34,7 @@ public class SetWordMgr : MonoBehaviour
     Text[] quizWord=new Text[5];
 
     //ﾌﾟﾚｲﾔｰがﾓﾝｽﾀｰと出会った時に正対させるために、PlayerController.csを入れる変数
-    GameObject playerController;
+    GameObject player;
 
     // Use this for initialization
     void Start()
@@ -70,7 +70,7 @@ public class SetWordMgr : MonoBehaviour
         }
 
         //ﾌﾟﾚｲﾔｰがﾓﾝｽﾀｰと出会った時に正対させるために、PlayerController.csを入れる変数
-        playerController=GameObject.Find("Player");
+       // player=GameObject.Find("Player");
 
 
 
@@ -79,17 +79,16 @@ public class SetWordMgr : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-          if (!playerController.GetComponent<PlayerController>().isEncountered) {  //PlayerControllerのisEncounteredをただのpublicにした場合の呼び出し方。
-        //if (!PlayerController.isEncountered)        //PlayerControllerのisEncounteredを public staticにすると、この呼び出し方。
-        //{
-            //GameObjectモンスターが配列に入っているかの確認のために回した→動きがあって面白いので残した、Playerと出会ってない時だけ
-            foreach (GameObject monster in monsters)
-            monster.transform.Rotate(0, 1, 0);
-        }
-        else {//‘20190320以降、ここにﾓﾝｽﾀｰを正対させる処理を書くこと！！！ 
-            //まずGameObject Playerを取得
-        }
+    {    
+        ////ﾓﾝｽﾀｰを回すｺｰﾄﾞはMonsterController.csに移す→　しかし、ここのｺｰﾄﾞはうまくかけたと思うので、参考のために残す
+        //  if (!player.GetComponent<PlayerController>().isEncountered) {  //PlayerControllerのisEncounteredをただのpublicにした場合の呼び出し方。
+        //    //GameObjectモンスターが配列に入っているかの確認のために回した→動きがあって面白いので残した、Playerと出会ってない時だけ
+        //    foreach (GameObject monster in monsters)
+        //    monster.transform.Rotate(0, 1, 0);
+        //}
+        //else {//‘20190320以降、ここにﾓﾝｽﾀｰを正対させる処理を書くこと！！！ 
+        //   float playerAngle = player.transform.localEulerAngles.y;
+        //}
 
     }
 

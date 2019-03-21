@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 9500000}
-  - component: {fileID: 1848999488619321481}
   - component: {fileID: 3618007304303564888}
+  - component: {fileID: 7554627012972858374}
   m_Layer: 0
   m_Name: RedJelly
   m_TagString: Untagged
@@ -100,20 +100,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &1848999488619321481
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  m_Radius: 0.43220258
-  m_Height: 0.9365799
-  m_Direction: 1
-  m_Center: {x: -0.052284762, y: 0.03575942, z: 0.052942023}
 --- !u!65 &3618007304303564888
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127,6 +113,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.86440516, y: 0.9365799, z: 0.8395159}
   m_Center: {x: -0.052284762, y: 0.03575942, z: 0.052942023}
+--- !u!114 &7554627012972858374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130d7b0356acd8d4a9a89bf8840e947a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  question:
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &1594818613687693432
 GameObject:
   m_ObjectHideFlags: 0

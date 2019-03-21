@@ -5,16 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody myRigidbody;
-    ////はしごに触っていたらtrue
-    //    private bool isTouchingLadder = false;
 
      [SerializeField] float m_moveSpeedOnLadder = 1.0f;    // このメンバ変数は上の方に書いた方がよい  鈴木さんに書いてもらった
                                                            //    m：メンバ変数（privateな変数）を示す
                                                            //s：静的変数（static付き変数）を示す
     //ﾓﾝｽﾀｰと出会った時のﾌﾗｸﾞ
-    //private bool isEncountered=false;
       public bool isEncountered=false;
-   // public static bool isEncountered=false;
 
     // Start is called before the first frame update
     void Start()
@@ -58,9 +54,10 @@ public class PlayerController : MonoBehaviour
             //次にモンスターを正対させたい　　→　SetWordMgrで書く、ということは　isEncounteredはpublicにする
             //選択肢をランダムに配列しなおしたい　　→　ここで書く
             //ﾎﾞﾀﾝ表示はゆっくりだしたい(今はぱっとでる)
-            GameObject monsterCanvas = other.transform.Find("Canvas").gameObject;
-            CanvasGroup monsterCanvasGroup = monsterCanvas.GetComponent<CanvasGroup>();
-            monsterCanvasGroup.alpha = 1; 
+            //20190321MonsterController.csに移した
+            //GameObject monsterCanvas = other.transform.Find("Canvas").gameObject;
+            //CanvasGroup monsterCanvasGroup = monsterCanvas.GetComponent<CanvasGroup>();
+            //monsterCanvasGroup.alpha = 1; 
             //クイズに行く
         }
     }

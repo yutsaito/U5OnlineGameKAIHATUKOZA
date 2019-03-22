@@ -37,7 +37,7 @@ public class SetWordMgr : MonoBehaviour
     GameObject player;
 
     // Use this for initialization
-    void Start()
+    void Awake()        //AwakeはStartより先に実行される。今回はMonsterController.csのｽﾀｰﾄより先に実行してMonsterのButtonに質問・正答・誤答をいれたいため。
     {
         //MonsterTagを持つ全てのGameObjectの、配列変数への代入
         monsters = GameObject.FindGameObjectsWithTag("MonsterTag");

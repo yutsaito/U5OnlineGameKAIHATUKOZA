@@ -125,12 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130d7b0356acd8d4a9a89bf8840e947a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  question:
-  - 
-  - 
-  - 
-  - 
-  - 
+  quizWord: {fileID: 0}
+  correctWord: {fileID: 0}
 --- !u!1 &1594818613687693432
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +376,7 @@ GameObject:
   - component: {fileID: 1832313550841913214}
   - component: {fileID: 5235357509867674469}
   - component: {fileID: 3689577292456853768}
+  - component: {fileID: 5865272129914141479}
   m_Layer: 5
   m_Name: Button4
   m_TagString: Untagged
@@ -486,6 +483,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5865272129914141479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4251839995031479561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ec11ebb5bf25e47b4c9b18261dbecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctAudioClip: {fileID: 0}
+  incorrectAudioClip: {fileID: 0}
 --- !u!1 &4944150989898466164
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +509,7 @@ GameObject:
   - component: {fileID: 7877272624858369930}
   - component: {fileID: 5274723683326223256}
   - component: {fileID: 2937260897899322996}
+  - component: {fileID: 3747295754051093557}
   m_Layer: 5
   m_Name: Button2
   m_TagString: Untagged
@@ -604,6 +616,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &3747295754051093557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944150989898466164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ec11ebb5bf25e47b4c9b18261dbecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctAudioClip: {fileID: 0}
+  incorrectAudioClip: {fileID: 0}
 --- !u!1 &5098593692909132949
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +642,7 @@ GameObject:
   - component: {fileID: 3216296778952762388}
   - component: {fileID: 7428666242154392554}
   - component: {fileID: 2211802080684648256}
+  - component: {fileID: 5821228065127141588}
   m_Layer: 5
   m_Name: Button3
   m_TagString: Untagged
@@ -722,6 +749,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5821228065127141588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5098593692909132949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ec11ebb5bf25e47b4c9b18261dbecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctAudioClip: {fileID: 0}
+  incorrectAudioClip: {fileID: 0}
 --- !u!1 &5166583158017057399
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +970,7 @@ GameObject:
   - component: {fileID: 1170920311760302895}
   - component: {fileID: 5103666017654295949}
   - component: {fileID: 962250199508687290}
+  - component: {fileID: 5025055751400258349}
   m_Layer: 5
   m_Name: Button1
   m_TagString: Untagged
@@ -1035,6 +1077,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5025055751400258349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734337514236452511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ec11ebb5bf25e47b4c9b18261dbecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctAudioClip: {fileID: 0}
+  incorrectAudioClip: {fileID: 0}
 --- !u!1 &6364486379562741054
 GameObject:
   m_ObjectHideFlags: 0

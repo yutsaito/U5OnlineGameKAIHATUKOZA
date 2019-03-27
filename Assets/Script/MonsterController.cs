@@ -7,8 +7,8 @@ using System;
 
 public class MonsterController : MonoBehaviour
 {
-    private Text quizWord;
-    private Text correctWord;
+    public Text quizWord;
+    public Text correctWord;
     private Text[] buttonText = new Text[5];
     private Text[] buttonText2 = new Text[4];
     private GameObject player;
@@ -80,49 +80,64 @@ public class MonsterController : MonoBehaviour
             //ﾎﾞﾀﾝ表示はゆっくりだしたい(今はぱっとでる)
             myCanvas = this.transform.Find("Canvas").gameObject;
             CanvasGroup myCanvasGroup = myCanvas.GetComponent<CanvasGroup>();
-            myCanvasGroup.alpha = 1;
+            myCanvasGroup.alpha = 0.9f;
 
         }
     }
 
     public void suffle(ref Text b, Text c, Text d, Text e)
     {
-        Text[] array3 = new Text[4];
-        array3[0] = b;
-        array3[1] = c;
-        array3[2] = d;
-        array3[3] = e;
-        //Debug.Log(array3[0].text);
-        //Debug.Log(array3[1].text);
-        //Debug.Log(array3[2].text);
-        //Debug.Log(array3[3].text);        //ここは正常に表示された
+        //クラスTextで配列をつくるとうまくいかない（以下秋山さんの説明）　　→　変数string[]の配列にすれば、中身を直接変えられる
+        //インデックスが0, 1, 2, 3 のText配列に、
+        //シャッフルしてインデックスが1, 2, 3, 0 のText配列の文字列を順番に代入していくとして、
+        //最初の0に1の文字列を代入します。
+        //ここで注意してほしいのは、シャッフルした方の配列のインデックス0(配列の最後尾)の文字列も1と同じ文字列になる、ということです。
+        //配列をシャッフルしても、Textは内容が完全にコピーされるわけでなく、それぞれの要素が指すのは元の配列と「同じ」Textです。
 
-        Text[] array4 = array3.OrderBy(i => Guid.NewGuid()).ToArray();     //ここがおかしい20190322
+        //元の配列、シャッフルした配列の要素は別物でなく同じデータを参照しているので、代入操作によって内容がかぶってしまうことになります。
 
-        Debug.Log(array4[0].text);
-        Debug.Log(array4[1].text);
-        Debug.Log(array4[2].text);
-        Debug.Log(array4[3].text);  //ここはOKみたい
+        //結局、Textはクラスであって、その配列の順番を変えると全ての中身も（ﾘﾝｸされて）ついてくる、ということ。
+        //そういう状態で、たとえば一番最初にあらたに持ってきた配列要素の中身の一部であるtextを代入すると、
+        //その持ってこられた元の配列要素がﾘﾝｸされているので、元の配列自体が変わってしまう。・・・秋山さんの説明の方がわかりやすいね・・・
+        //やっぱり今いちピンとこない。        //Debug.Log(array4[0].text);で正常にｼｬｯﾌﾙされたのが表示されたので。
 
-        //buttonText[1] = array4[0];
-        //buttonText[2] = array4[1];
-        //buttonText[3] = array4[2];
-        //buttonText[4] = array4[3];
+        //Text[] array3 = new Text[4];
+        //array3[0] = b;
+        //array3[1] = c;
+        //array3[2] = d;
+        //array3[3] = e;
 
-        //Debug.Log(buttonText[1].text);
-        //Debug.Log(buttonText[2].text);
-        //Debug.Log(buttonText[3].text);
-        //Debug.Log(buttonText[4].text);
+        String[] texts1 = new string[4];
+        texts1[0] = b.text;
+        texts1[1] = c.text;
+        texts1[2] = d.text;
+        texts1[3] = e.text;
 
-        
-        buttonText2[0] = this.transform.Find("Canvas/Button1").GetComponentInChildren<Text>();  
-        buttonText2[0].text = array4[0].text;
+        //Text[] array4 = array3.OrderBy(i => Guid.NewGuid()).ToArray();     //ここがおかしい20190322
+        String[] texts2 = texts1.OrderBy(i => Guid.NewGuid()).ToArray();
+
+        //Debug.Log(array4[0].text);
+        //Debug.Log(array4[1].text);
+        //Debug.Log(array4[2].text);
+        //Debug.Log(array4[3].text);  //ここはOKみたい
+
+        buttonText2[0] = this.transform.Find("Canvas/Button1").GetComponentInChildren<Text>();
+        buttonText2[0].text = texts2[0];
         buttonText2[1] = this.transform.Find("Canvas/Button2").GetComponentInChildren<Text>();
-        buttonText2[1].text = array4[1].text;
+        buttonText2[1].text = texts2[1];
         buttonText2[2] = this.transform.Find("Canvas/Button3").GetComponentInChildren<Text>();
-        buttonText2[2].text = array4[2].text;
+        buttonText2[2].text = texts2[2];
         buttonText2[3] = this.transform.Find("Canvas/Button4").GetComponentInChildren<Text>();
-        buttonText2[3].text = array4[3].text;
+        buttonText2[3].text = texts2[3];
+
+        //buttonText2[0] = this.transform.Find("Canvas/Button1").GetComponentInChildren<Text>();  
+        //buttonText2[0].text = array4[0].text;
+        //buttonText2[1] = this.transform.Find("Canvas/Button2").GetComponentInChildren<Text>();
+        //buttonText2[1].text = array4[1].text;
+        //buttonText2[2] = this.transform.Find("Canvas/Button3").GetComponentInChildren<Text>();
+        //buttonText2[2].text = array4[2].text;
+        //buttonText2[3] = this.transform.Find("Canvas/Button4").GetComponentInChildren<Text>();
+        //buttonText2[3].text = array4[3].text;
 
 
         Debug.Log(buttonText2[0].text);

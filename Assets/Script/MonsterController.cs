@@ -7,14 +7,21 @@ using System;
 
 public class MonsterController : MonoBehaviour
 {
-    public Text quizWord;
-    public Text correctWord;
+    public String quizWord;
+    public String correctWord;
+    //ﾎﾞﾀﾝのﾃｷｽﾄを読み取るための配列変数
     private Text[] buttonText = new Text[5];
+    //選択肢ﾎﾞﾀﾝのみを読み取り保存するための配列変数
     private Text[] buttonText2 = new Text[4];
     private GameObject player;
     private bool isEncounteredToPlayer = false;
+    //子ｵﾌﾞｼﾞｪｸﾄであるﾎﾞﾀﾝ類を隠す⇔表示させるためのCanvas
     private GameObject myCanvas;
-
+    //正解・不正解を受けてﾓﾝｽﾀｰが発する言葉を表示するためのCanvas
+    private GameObject myCanvasForMessage;
+    //[SerializeField]にしたのは、ﾓﾝｽﾀｰごとに違う言葉を発するように、Inspectorで個々に入力するため
+    [SerializeField] String correctMessageText;
+    [SerializeField] String incorrectMessageText;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +31,10 @@ public class MonsterController : MonoBehaviour
         //ﾓﾝｽﾀｰのﾎﾞﾀﾝから、質問Word、正解wordを保存しておく
         //Transform.Findは子ｵﾌﾞｼﾞｪｸﾄから探す、非ｱｸﾃｨﾌﾞも//秋山さんに教えてもらった
         //Start()内に置くと、ﾃｷｽﾄは全てdefaultの"button"になってしまった　　→　　SetWordMgrのStart()をAwake()に書き換えたらButtonに値が入った後にこっちにくるようになった。
-        quizWord = this.transform.Find("Canvas/Button0").GetComponentInChildren<Text>();
-        correctWord = this.transform.Find("Canvas/Button1").GetComponentInChildren<Text>();
-        Debug.Log(quizWord.text);
-        Debug.Log(correctWord.text);
+        quizWord = this.transform.Find("Canvas/Button0").GetComponentInChildren<Text>().text;       //ｸｲｽﾞ英単語はｹﾞｰﾑｽﾀｰﾄ時にSetWordMgrから渡されるﾎﾞﾀﾝ0のtext(Textではなく）を読み取る、その後も変化なし
+        correctWord = this.transform.Find("Canvas/Button1").GetComponentInChildren<Text>().text;    //正解英単語はｹﾞｰﾑｽﾀｰﾄ時にSetWordMgrから渡されるﾎﾞﾀﾝ１のtextを読み取る、その後も変化なし
+        Debug.Log(quizWord);
+        Debug.Log(correctWord);
         for (int i = 0; i <= 4; i++)
         {
             buttonText[i] = this.gameObject.transform.Find("Canvas/Button" + i).GetComponentInChildren<Text>();     //buttonText[0]:問題 buttonText[1]:正解 buttonText[2-4]:誤回答
@@ -81,6 +88,7 @@ public class MonsterController : MonoBehaviour
             myCanvas = this.transform.Find("Canvas").gameObject;
             CanvasGroup myCanvasGroup = myCanvas.GetComponent<CanvasGroup>();
             myCanvasGroup.alpha = 0.9f;
+            myCanvasGroup.interactable = true;
 
         }
     }
@@ -145,11 +153,33 @@ public class MonsterController : MonoBehaviour
         Debug.Log(buttonText2[2].text);
         Debug.Log(buttonText2[3].text);
 
-
-
-
-
     }
+
+    public void MonsterMessage(ref bool isCorrect)
+    {
+        Debug.Log("ﾒｯｾｰｼﾞがあるよ！");
+        //ﾒｯｾｰｼﾞ表示
+        String myMessage = this.transform.Find("MonsterMessageCanvas/MonsterMessageText").GetComponent<Text>().text;
+ //       Debug.Log(myMessage);
+        if (isCorrect)
+        {
+            myMessage= correctMessageText;      //これでは表示されない
+            this.transform.Find("MonsterMessageCanvas/MonsterMessageText").GetComponent<Text>().text = correctMessageText;
+            Debug.Log(myMessage);
+        }
+        else
+        {
+            myMessage = incorrectMessageText;       //これでは表示されない
+
+            Debug.Log(myMessage);
+            this.transform.Find("MonsterMessageCanvas/MonsterMessageText").GetComponent<Text>().text = incorrectMessageText;
+        }
+
+        myCanvasForMessage = this.transform.Find("MonsterMessageCanvas").gameObject;
+        CanvasGroup myCanvasGroup = myCanvasForMessage.GetComponent<CanvasGroup>();
+        myCanvasGroup.alpha = 1.0f;
+    }
+
     //ｼｬｯﾌﾙ後の選択肢を入れなおす
     //        for (int i = 0; i <4; i++)
     //        {

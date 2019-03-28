@@ -140,12 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130d7b0356acd8d4a9a89bf8840e947a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  question:
-  - 
-  - 
-  - 
-  - 
-  - 
+  quizWord: {fileID: 0}
+  correctWord: 
 --- !u!1 &171089010340058826
 GameObject:
   m_ObjectHideFlags: 0
